@@ -3,9 +3,11 @@
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 10px 10px 10px 10px;
+  background-color: gray;
 }
 
 .map {
+  border-color: blue;
   height: 40vh;
   width: 70%;
 }
