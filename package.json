@@ -1,4 +1,5 @@
 {
+  "homepage": "https://robinsonnathan.github.io/",
   "name": "noserver",
   "version": "0.1.0",
   "private": true,
@@ -7,10 +8,13 @@
     "react-dom": "^15.6.1"
   },
   "devDependencies": {
+    "gh-pages": "^1.0.0",
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/", 
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "start-js": "react-scripts start",

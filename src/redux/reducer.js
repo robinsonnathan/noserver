@@ -13,11 +13,8 @@ const initialState = {
 const PHOTOSTATUS = 'PHOTOSTATUS';
 
 export default function reducer(state = initialState, action) {
-  console.log(action.type)
-
   switch (action.type) {
     case PHOTOSTATUS + '_PENDING':
-      console.log("Pending Promise")
       return {loading: true}
 
     case PHOTOSTATUS + '_FULFILLED':
@@ -35,8 +32,20 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-export function getPhoto() {
-  const url = `https://api.unsplash.com/photos/random/?client_id=${photoApi}`
-  const promise = axios.get(url).then(response => response.data);
-  return {type: PHOTOSTATUS, payload: promise}
-}
+  export function getPhoto() {
+    const url = `https://api.unsplash.com/photos/random/?client_id=${photoApi}`
+    const promise = axios.get(url).then((response) => {
+      console.log(response.data.user);
+
+      response.data.user.location = getLocation(response.data.user.location)
+      return response.data});
+    return {type: PHOTOSTATUS, payload: promise}
+  }
+
+  export function getLocation(location){
+    if (location == null){
+      return "560+S+100+W+St,+Provo,+UT+84601"
+    }
+    var filterSpaces = location.split('').filter( (elem) => {return elem !== ' '}).join('').split(',')
+    return filterSpaces
+  }

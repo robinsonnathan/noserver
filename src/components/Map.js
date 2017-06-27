@@ -1,17 +1,29 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {gMapsApi} from '../apiKeys'
+import {gMapsApi} from '../apiKeys';
+import {getLocation} from '../redux/reducer';
 
 
-export default class Map extends Component{
+class Map extends Component{
+
   render(){
     return(
-      <iframe className="map" src={`//www.google.com/maps/embed/v1/place?q=560+S+100+W+St,+Provo,+UT+84601
+      <div>
+
+      <iframe className="map" src={`//www.google.com/maps/embed/v1/place?q=+${this.props.location}
       &zoom=15
       &key=${gMapsApi}`}>
       </iframe>
+
+
+      </div>
     )
   }
-
-
 }
+
+function mapStateToProps(state){
+    return{location: state.photoLocation
+    }
+}
+
+export default connect(mapStateToProps) (Map)
